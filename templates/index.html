@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шаблон скриншота поста Telegram (iOS)</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">📱 TG&nbsp;Mock — конструктор скриншота поста канала</div>
+  <div class="actions">
+    <span class="hint">Пресеты:</span>
+    <button class="btn small" data-preset="default">По умолчанию</button>
+    <button class="btn small" data-preset="dark_photo">Тёмный + фото</button>
+    <button class="btn small" data-preset="light_text">Светлый текст</button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="panel" id="form">
+
+    <details open>
+      <summary>⏱ Время на телефоне и статус-бар</summary>
+      <div class="grid">
+        <label>Время<input id="status.time" type="text" value="9:41"></label>
+        <label>Заряд, %<input id="status.battery" type="number" min="0" max="100" value="100"></label>
+        <label class="check"><input id="status.charging" type="checkbox"> зарядка</label>
+        <label class="check"><input id="status.show_battery_percent" type="checkbox" checked> показывать %</label>
+        <label class="check"><input id="status.wifi" type="checkbox" checked> Wi-Fi</label>
+        <label class="check"><input id="status.cellular" type="checkbox" checked> сотовая сеть</label>
+        <label>Уровень сигнала (0–4)<input id="status.cellular_bars" type="number" min="0" max="4" value="4"></label>
+        <label>Отступ времени<input id="status.side_margin" type="number" step="1" value="30"></label>
+      </div>
+    </details>
+
+    <details open>
+      <summary>📝 Пост: текст, время, реакции</summary>
+      <div class="grid">
+        <label class="wide">Текст поста <span class="hint">Enter = перенос строки</span>
+          <textarea id="post.text" rows="6"></textarea></label>
+        <label class="wide hint">Разметка: <b>**жирный**</b>, <i>*курсив*</i>, <code>`код`</code>, <b>||спойлер||</b>; ссылки, @упоминания и #хештеги подсвечиваются сами.</label>
+        <label>Размер текста, pt<input id="post.text_size" type="number" step="0.5" min="10" max="26" value="16"></label>
+        <label>Межстрочный интервал<input id="post.line_spacing" type="number" step="0.5" min="0" max="14" value="2"></label>
+        <label class="wide">Картинка в посте
+          <div class="row">
+            <input type="file" id="media-file" accept="image/*">
+            <button class="btn small" data-clear="post.media">убрать</button>
+          </div>
+          <input id="post.media" type="hidden" value="">
+        </label>
+        <label class="wide">Заголовок-дата<input id="post.date_chip" type="text" value="10 октября"></label>
+        <label class="check"><input id="post.show_date_chip" type="checkbox" checked> показывать дату</label>
+        <label class="check"><input id="post.show_tail" type="checkbox" checked> хвостик пузыря</label>
+        <label>Макс. ширина текста (0 = авто)<input id="post.max_width" type="number" step="10" value="0"></label>
+        <label>Макс. ширина картинки (0 = авто)<input id="post.media_max_width" type="number" step="10" value="0"></label>
+      </div>
+
+      <div class="sub">Реакции</div>
+      <div id="reactions" class="reactions"></div>
+      <div class="row">
+        <button class="btn small" id="add-reaction">+ реакция</button>
+        <span class="hint">Быстрый набор:</span>
+      </div>
+      <div class="quick" id="quick-emoji"></div>
+
+      <div class="sub">Время поста и просмотры</div>
+      <div class="grid">
+        <label>Время поста<input id="post.time" type="text" value="12:34"></label>
+        <label>Просмотры<input id="post.views" type="number" min="0" value="12500"></label>
+        <label>Формат просмотров
+          <select id="post.views_format">
+            <option value="km">12.5K</option>
+            <option value="ru">12,5 тыс.</option>
+            <option value="raw">12 500</option>
+          </select>
+        </label>
+        <label class="check"><input id="post.show_views" type="checkbox" checked> показывать просмотры</label>
+      </div>
+    </details>
+
+    <details>
+      <summary>🔘 Кнопки под постом</summary>
+      <label class="wide">По одной кнопке в строке <textarea id="buttons" rows="2" placeholder="Смотреть разбор"></textarea></label>
+    </details>
+
+    <details open>
+      <summary>📣 Канал</summary>
+      <div class="grid">
+        <label>Название<input id="channel.name" type="text" value="Мой канал"></label>
+        <label>Подписчики <span class="hint">число или текст</span><input id="channel.subscribers" type="text" value="125431"></label>
+        <label class="check"><input id="channel.verified" type="checkbox" checked> галочка «проверен»</label>
+        <label>Кнопка слева<input id="channel.back_text" type="text" value="Чаты"></label>
+        <label>Иконка справа
+          <select id="channel.header_action">
+            <option value="bell">колокольчик</option>
+            <option value="bell_off">колокольчик выкл.</option>
+            <option value="search">поиск</option>
+            <option value="dots">троеточие</option>
+            <option value="none">нет</option>
+          </select>
+        </label>
+        <label>Аватар
+          <div class="row">
+            <input type="file" id="avatar-file" accept="image/*">
+            <button class="btn small" data-clear="channel.avatar">убрать</button>
+          </div>
+          <input id="channel.avatar" type="hidden" value="">
+        </label>
+        <label>Цвет аватара 1<input id="channel.avatar_bg" type="color" value="#4a76a8"></label>
+        <label>Цвет аватара 2<input id="channel.avatar_bg2" type="color" value="#7bb0e8"></label>
+      </div>
+    </details>
+
+    <details>
+      <summary>📱 Устройство, тема, низ экрана</summary>
+      <div class="grid">
+        <label>Модель
+          <select id="screen.device">
+            {% for key, name in devices.items() %}
+            <option value="{{ key }}" {% if key == 'iphone_15_pro' %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>Тема
+          <select id="screen.theme">
+            {% for key in themes %}<option value="{{ key }}">{% if key == 'dark' %}тёмная{% else %}светлая{% endif %}</option>{% endfor %}
+          </select>
+        </label>
+        <label>Масштаб
+          <select id="screen.scale">
+            <option value="1">1x</option><option value="2">2x</option><option value="3" selected>3x</option>
+          </select>
+        </label>
+        <label>Фон
+          <select id="screen.background">
+            <option value="pattern">узор</option>
+            <option value="flat">ровный</option>
+            <option value="gradient">градиент</option>
+          </select>
+        </label>
+        <label>Сдвиг контента вверх<input id="screen.scroll" type="number" step="10" value="0"></label>
+        <label>Низ экрана
+          <select id="bottom.type">
+            <option value="join">кнопка подписки</option>
+            <option value="input">поле ввода</option>
+            <option value="none">нет</option>
+          </select>
+        </label>
+        <label>Текст кнопки<input id="bottom.text" type="text" value="Подписаться"></label>
+        <label>Placeholder ввода<input id="bottom.placeholder" type="text" value="Сообщение"></label>
+      </div>
+      <p class="hint">
+        Шрифт: {% if has_sf %}SF Pro ✔{% else %}запасной — положите SF-Pro.ttf в assets/fonts{% endif %} ·
+        Эмодзи: {% if has_emoji %}Noto Color Emoji ✔{% else %}шрифт эмодзи не найден{% endif %}
+      </p>
+    </details>
+  </section>
+
+  <section class="preview">
+    <div class="preview-head">
+      <strong>Превью</strong>
+      <span id="status" class="status"></span>
+    </div>
+    <div class="preview-box">
+      <img id="preview-img" alt="предпросмотр скриншота" src="">
+      <div id="preview-empty" class="empty">Готовлю превью…</div>
+    </div>
+    <div class="preview-actions">
+      <button id="btn-png" class="btn primary" disabled>⬇ Скачать PNG</button>
+      <button id="btn-json" class="btn" disabled>⬇ Скачать config.json</button>
+      <label class="check"><input type="checkbox" id="zoom-fit" checked> вписать в экран</label>
+      <span id="size" class="hint"></span>
+    </div>
+  </section>
+</main>
+
+<script>window.__DEFAULTS__ = {{ defaults|tojson }};</script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

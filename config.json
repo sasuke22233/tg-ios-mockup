@@ -1,0 +1,71 @@
+{
+  "screen": {
+    "device": "iphone_15_pro",
+    "scale": 3,
+    "theme": "dark",
+    "theme_overrides": {},
+    "background": "pattern",
+    "scroll": 0.0,
+    "output": "output/post.png"
+  },
+  "status": {
+    "time": "9:41",
+    "battery": 100,
+    "charging": false,
+    "show_battery_percent": true,
+    "wifi": true,
+    "cellular": true,
+    "cellular_bars": 4,
+    "side_margin": 30.0
+  },
+  "channel": {
+    "name": "Мой канал",
+    "subscribers": "125 431 подписчик",
+    "avatar": null,
+    "avatar_bg": "#4A76A8",
+    "avatar_bg2": "#7BB0E8",
+    "verified": true,
+    "back_text": "Чаты",
+    "header_action": "bell"
+  },
+  "post": {
+    "text": "Привет! Это шаблон поста Telegram-канала 👋\n\nМеняется одной строкой: время поста, **реакции** и время на телефоне. Работает `разметка`, ссылки вида t.me/telegram и @упоминания.\n\nКартинку приложите любую — путь указывается в post.media 📷",
+    "media": null,
+    "time": "12:34",
+    "views": 12500,
+    "views_text": "",
+    "views_format": "km",
+    "show_views": true,
+    "reactions": [
+      {
+        "emoji": "🔥",
+        "count": 431,
+        "selected": true,
+        "count_text": ""
+      },
+      {
+        "emoji": "❤️",
+        "count": 128,
+        "selected": false,
+        "count_text": ""
+      },
+      {
+        "emoji": "👍",
+        "count": 64,
+        "selected": false,
+        "count_text": ""
+      }
+    ],
+    "buttons": [],
+    "date_chip": "10 октября",
+    "show_date_chip": true,
+    "show_tail": true,
+    "max_width": 0.0,
+    "media_max_width": 0.0
+  },
+  "bottom": {
+    "type": "join",
+    "text": "Подписаться",
+    "placeholder": "Сообщение"
+  }
+}

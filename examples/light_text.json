@@ -1,0 +1,56 @@
+{
+  "screen": {
+    "device": "iphone_15_pro",
+    "scale": 3,
+    "theme": "light",
+    "theme_overrides": {},
+    "background": "pattern",
+    "scroll": 0.0,
+    "output": "output/example_light_text.png"
+  },
+  "status": {
+    "time": "9:41",
+    "battery": 100,
+    "charging": false,
+    "show_battery_percent": true,
+    "wifi": true,
+    "cellular": true,
+    "cellular_bars": 4,
+    "side_margin": 30.0
+  },
+  "channel": {
+    "name": "Дизайн без воды",
+    "subscribers": 54310,
+    "avatar": null,
+    "avatar_bg": "#E8590C",
+    "avatar_bg2": "#FFB070",
+    "verified": true,
+    "back_text": "Чаты",
+    "header_action": "bell_off"
+  },
+  "post": {
+    "text": "Три правила, которые сразу делают макет чище 👇\n\n1. Один акцент на экран.\n2. Воздух дороже декора.\n3. Если элемент спорный — удалите его, он и был лишним.\n\nСохраняйте, чтобы не потерять 💾",
+    "media": null,
+    "time": "12:34",
+    "views": 24500,
+    "views_text": "",
+    "views_format": "km",
+    "show_views": true,
+    "reactions": [
+      {"emoji": "🔥", "count": 742, "selected": false, "count_text": ""},
+      {"emoji": "👏", "count": 318, "selected": true, "count_text": ""},
+      {"emoji": "💯", "count": 96, "selected": false, "count_text": ""}
+    ],
+    "buttons": [],
+    "date_chip": "10 октября",
+    "show_date_chip": true,
+    "show_tail": true,
+    "max_width": 0.0,
+    "media_max_width": 0.0
+  },
+  "bottom": {
+    "type": "input",
+    "text": "Подписаться",
+    "placeholder": "Сообщение"
+  }
+}
